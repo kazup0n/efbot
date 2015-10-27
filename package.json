@@ -5,6 +5,8 @@
   "author": "Kazuhiro Sasaki <dusty.trombone@gmail.com>",
   "description": "A simple helpful robot for your Company",
   "dependencies": {
+    "firebase": "^2.3.1",
+    "firebase-token-generator": "^2.0.0",
     "hubot": "^2.16.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.2",
@@ -31,4 +33,3 @@
     "test": "node_modules/.bin/jasmine-node --coffee --color spec/"
   }
 }
-

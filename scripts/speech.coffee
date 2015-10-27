@@ -8,13 +8,20 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
-socket = require('socket.io-client')('https://fboard.herokuapp.com/', {'reconnect': true })
+Firebase = require('firebase')
+FirebaseTokenGenerator = require('firebase-token-generator')
+generator = new FirebaseTokenGenerator(process.env.FIREBASE_SECRET)
+token = generator.createToken({uid: "hubot"})
+client = new Firebase('https://fboard.firebaseio.com/messages')
+client.authWithCustomToken token, (err, authData)->
+
 
 module.exports = (robot) ->
 
   robot.respond /speech (.*)$/i, (res) ->
-      socket.emit('speech', res.match[1])
-
+       client.push
+           message: res.match[1]
+           postedAt: Date.now()
 
   robot.adapter.client?.on? 'raw_message', (msg) ->
        return if msg.type isnt 'message' || msg.subtype isnt 'bot_message' ||  msg.user_name is 'efbot'
@@ -22,7 +29,10 @@ module.exports = (robot) ->
        match = msg.attachments[0].fallback.match(/speech (.*)$/i)
        return unless match
        robot.logger.info(match[1])
-       socket.emit('speech', match[1])
+       client.push
+          message: match[1]
+          postedAt: Date.now()
+
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
   # robot.respond /open the (.*) doors/i, (res) ->
