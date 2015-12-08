@@ -15,7 +15,7 @@ module.exports = function(robot){
 	}
 	robot.adapter.client.on('raw_message', function(msg){
 
-		if(msg.type !== 'message' || messge.subtype !== 'bot_message' || msg.user_name === 'efbot'){
+		if(msg.type !== 'message' || msg.subtype !== 'bot_message' || msg.user_name === 'efbot'){
 			return;
 		}
 
