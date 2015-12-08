@@ -1,7 +1,6 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
 var Q = require('q');
-
-var sheet = new GoogleSpreadsheet('1UKrP0D6Rzv51ATd7BwG7sY4qbFzaORCslnrNBlxxwQk');
+var sheet = new GoogleSpreadsheet(process.env.SLIDES_SPREADSHEET);
 
 var creds = JSON.parse(process.env.GOOGLE_AUTH_SECRET);
 var getSlides = function(){
