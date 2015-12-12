@@ -1,7 +1,7 @@
 var GoogleSpreadsheet = require('google-spreadsheet');
 var Q = require('q');
 var sheet = new GoogleSpreadsheet(process.env.SLIDES_SPREADSHEET);
-
+console.log(process.env.GOOGLE_AUTH_SECRET);
 var creds = JSON.parse(process.env.GOOGLE_AUTH_SECRET);
 var getSlides = function(){
 	return Q.ninvoke(sheet, 'useServiceAccountAuth', creds)
