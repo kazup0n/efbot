@@ -1,11 +1,8 @@
-var GoogleSpreadsheet = require('google-spreadsheet');
 var Q = require('q');
-var sheet = new GoogleSpreadsheet(process.env.SLIDES_SPREADSHEET);
-var creds = JSON.parse(unescape(process.env.GOOGLE_AUTH_SECRET));
+
 var getSlides = function(){
-	return Q.ninvoke(sheet, 'useServiceAccountAuth', creds)
-	.then(function(err){ return Q.ninvoke(sheet, 'getRows', 1)})
-	.then(function(rows){
+	var getRows = require('../lib/spreadsheet');
+	return getRows(1).then(function(rows){
 		return rows.map(function(row){
 			return {
 				title: row.title,
@@ -13,7 +10,8 @@ var getSlides = function(){
 				issuedAt: row.issuedat,
 				expiredAt: row.expiredat
 			};
-		});});
+		});
+	});
 };
 
 var postSlides = function(slides){
