@@ -1,11 +1,23 @@
-var GoogleSpreadsheet = require('google-spreadsheet');
+//  Description:
+//	  Updates slide pages from Google spread sheet and push them to firebase.
+//  Dependencies:
+// 	 "firebase": "^2.3.1"
+// 	 "firebase-token-generator": "^2.0.0"
+// 	 "google-spreadsheet": "^1.0.1"
+// 	 "q": "^1.4.1"
+//  Configuration:
+//  	GOOGLE_AUTH_SECRET private sercret of google api's service account
+//  	SLIDES_SPREADSHEET id of spreadsheet
+//  Commands:
+//  	hubot slides update - Get slides from google spreadsheets and post them to firebase
+//  Author:
+//   kazup0n(https://github.com/kazup0n)
+//
 var Q = require('q');
-var sheet = new GoogleSpreadsheet(process.env.SLIDES_SPREADSHEET);
-var creds = JSON.parse(unescape(process.env.GOOGLE_AUTH_SECRET));
+
 var getSlides = function(){
-	return Q.ninvoke(sheet, 'useServiceAccountAuth', creds)
-	.then(function(err){ return Q.ninvoke(sheet, 'getRows', 1)})
-	.then(function(rows){
+	var getRows = require('../lib/spreadsheet');
+	return getRows(1).then(function(rows){
 		return rows.map(function(row){
 			return {
 				title: row.title,
@@ -13,7 +25,8 @@ var getSlides = function(){
 				issuedAt: row.issuedat,
 				expiredAt: row.expiredat
 			};
-		});});
+		});
+	});
 };
 
 var postSlides = function(slides){
