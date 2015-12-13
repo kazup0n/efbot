@@ -1,3 +1,7 @@
+// Description
+//  Push what robot hear to firebase
+//  Commands:
+//  	hubot speech  <message> - Robot speech <message>
 var pushMessage = function(msg){
 	var firebase = require('../lib/firebase.js');
 	firebase(function(client){

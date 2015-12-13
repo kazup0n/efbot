@@ -1,3 +1,18 @@
+//  Description:
+//	  Updates slide pages from Google spread sheet and push them to firebase.
+//  Dependencies:
+// 	 "firebase": "^2.3.1"
+// 	 "firebase-token-generator": "^2.0.0"
+// 	 "google-spreadsheet": "^1.0.1"
+// 	 "q": "^1.4.1"
+//  Configuration:
+//  	GOOGLE_AUTH_SECRET private sercret of google api's service account
+//  	SLIDES_SPREADSHEET id of spreadsheet
+//  Commands:
+//  	hubot slides update - Get slides from google spreadsheets and post them to firebase
+//  Author:
+//   kazup0n(https://github.com/kazup0n)
+//
 var Q = require('q');
 
 var getSlides = function(){

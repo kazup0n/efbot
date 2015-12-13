@@ -31,15 +31,14 @@ describe("Eddie the shipboard computer", function() {
    afterEach(function() {
         robot.shutdown();
     });
-    
+
 	it("responds when greeted", function(done) {
         // here's where the magic happens!
         adapter.on("reply", function(envelope, strings) {
-            expect(strings[0]).toMatch("Why hello there");
-            
+            expect(strings[0]).toMatch("やっほー");
             done();
         });
-        
-        adapter.receive(new TextMessage(user, "Computer!"));
+
+        adapter.receive(new TextMessage(user, "おはよう"));
     });
 });

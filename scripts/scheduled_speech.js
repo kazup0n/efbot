@@ -1,3 +1,7 @@
+// Description
+// スプレッドシートにある定期メッセージをロード
+// Commands
+// 	hubot cron update - メッセージをロード
 var CronJob = require('cron').CronJob;
 var Q = require('q');
 

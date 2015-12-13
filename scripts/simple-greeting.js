@@ -1,5 +1,7 @@
+// Description
+// 魔法の言葉でポポポポーン
 module.exports = function(robot) {
-    robot.hear(/Computer!/, function(msg) {
-        msg.reply("Why hello there! (ticker tape, ticker tape)");
+    robot.hear(/おはよう/, function(msg) {
+        msg.reply("やっほー。");
     });
 };
